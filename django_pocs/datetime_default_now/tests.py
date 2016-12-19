@@ -43,11 +43,7 @@ class PostAdminFormTest(TestCaseBase):
 
     def test_valid_form_saves_an_object(self):
 
-        form = PostAdminForm(
-            data={
-                'datetime': self.party_like_its_1999,
-            }
-        )
+        form = PostAdminForm(data={ 'datetime': self.party_like_its_1999 })
 
         self.assertTrue(form.is_valid())
 
@@ -66,11 +62,7 @@ class PostAdminFormTest(TestCaseBase):
 
     def test_changing_date_via_form(self):
 
-        form = PostAdminForm(
-            data={
-                'datetime': self.party_like_its_1999,
-            }
-        )
+        form = PostAdminForm(data={ 'datetime': self.party_like_its_1999 })
 
         self.assertTrue(form.is_valid())        
 
