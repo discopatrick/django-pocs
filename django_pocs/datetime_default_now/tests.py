@@ -36,6 +36,11 @@ class PostAdminFormTest(TestCaseBase):
         form = PostAdminForm(data={})
         self.assertFalse(form.is_valid())
 
+    def test_completed_form_does_validate(self):
+
+        form = PostAdminForm(data={ 'datetime': self.party_like_its_1999 })
+        self.assertTrue(form.is_valid())
+
     def test_valid_form_saves_an_object(self):
 
         form = PostAdminForm(
@@ -50,6 +55,14 @@ class PostAdminFormTest(TestCaseBase):
         saved_post = Post.objects.get(id=post.id)
 
         self.assertEqual(saved_post.datetime, self.party_like_its_1999)
+
+    def test_invalid_form_raises_error_on_save(self):
+
+        form = PostAdminForm(data={})
+        self.assertFalse(form.is_valid())
+
+        with self.assertRaises(ValueError):
+            post = form.save()
 
     def test_changing_date_via_form(self):
 
