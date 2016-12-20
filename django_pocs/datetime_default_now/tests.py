@@ -4,8 +4,8 @@ from django.utils import timezone
 from datetime import datetime
 from unittest import skip
 
-from .models import Post
-from .admin import PostAdminForm
+from .models import Post, PostWithDefaultDateTime
+from .admin import PostAdminForm, PostWithDefaultDateTimeAdminForm
 
 class TestCaseBase(TestCase):
     party_like_its_1999 = timezone.make_aware(datetime(year=1999, month=12, day=31, hour=23, minute=59, second=59))
@@ -73,5 +73,34 @@ class PostAdminFormTest(TestCaseBase):
 
         form2.save()
         saved_post = Post.objects.get(id=post.id)
+        
+        self.assertEqual(saved_post.datetime, self.the_morning_after)
+
+class PostWithDefaultDateTimeAdminFormTest(TestCaseBase):
+
+    def test_valid_form_saves_an_object(self):
+
+        form = PostWithDefaultDateTimeAdminForm(data={ 'datetime': self.party_like_its_1999 })
+
+        self.assertTrue(form.is_valid())
+
+        post = form.save()
+        saved_post = PostWithDefaultDateTime.objects.get(id=post.id)
+
+        self.assertEqual(saved_post.datetime, self.party_like_its_1999)
+
+    def test_changing_date_via_form(self):
+
+        form = PostWithDefaultDateTimeAdminForm(data={ 'datetime': self.party_like_its_1999 })
+
+        self.assertTrue(form.is_valid())        
+
+        post = form.save()
+        form2 = PostWithDefaultDateTimeAdminForm(data={'datetime': self.the_morning_after}, instance=post)
+
+        self.assertTrue(form2.is_valid())
+
+        form2.save()
+        saved_post = PostWithDefaultDateTime.objects.get(id=post.id)
         
         self.assertEqual(saved_post.datetime, self.the_morning_after)
