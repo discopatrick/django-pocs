@@ -1,0 +1,39 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <h1>Product Filter</h1>
+
+    <form action="#" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+
+    <ul>
+        {% for product in page_obj.object_list %}
+            <li>{{ product.name }} - year: {{ product.release_date.year }} - month: {{ product.release_date.month }}</li>
+        {% endfor %}
+    </ul>
+
+
+    <h2>Navigation</h2>
+
+    <ul>
+        {% if page_obj.has_previous %}
+            <li>prev page</li>
+        {% endif %}
+
+            <li>{{ page_obj.number }}</li>
+
+        {% if page_obj.has_next %}
+            <li>next</li>
+        {% endif %}
+    </ul>
+
+</body>
+
+</html>

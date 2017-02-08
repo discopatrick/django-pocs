@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django_filter_pagination import urls as django_filter_pagination_urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^django_filter_pagination/', include(django_filter_pagination_urls))
 ]

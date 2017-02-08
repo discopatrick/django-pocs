@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'datetime_default_now',
+    'django_filter_pagination',
 )
 
 MIDDLEWARE_CLASSES = (
