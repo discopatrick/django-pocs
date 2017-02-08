@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
 
-from .models import Post, PostWithDefaultDateTime
+from .models import Post, PostWithDefaultDateTime, PostWithCleanMethod
 
 class PostAdminForm(forms.ModelForm):
     class Meta:
@@ -20,3 +20,12 @@ class PostWithDefaultDateTimeAdminForm(forms.ModelForm):
 @admin.register(PostWithDefaultDateTime)
 class PostAdmin(admin.ModelAdmin):
     form = PostWithDefaultDateTimeAdminForm
+
+class PostWithCleanMethodAdminForm(forms.ModelForm):
+    class Meta:
+        fields = '__all__'
+        model = PostWithCleanMethod
+
+@admin.register(PostWithCleanMethod)
+class PostAdmin(admin.ModelAdmin):
+    form = PostWithCleanMethodAdminForm

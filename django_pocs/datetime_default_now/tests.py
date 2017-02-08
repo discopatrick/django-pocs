@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from unittest import skip
 
-from .models import Post, PostWithDefaultDateTime
+from .models import Post, PostWithDefaultDateTime, PostWithCleanMethod
 from .admin import PostAdminForm, PostWithDefaultDateTimeAdminForm
 
 class TestCaseBase(TestCase):
@@ -260,3 +260,77 @@ class PostWithDefaultDateTimeAdminFormTest(TestCaseBase):
             saved_post_datetime,
             timezone.make_aware(datetime(2015, 6, 30, 12, 0, 0))
         )
+class PostWithCleanMethodAdminViewTest(TestCaseBase):
+
+    def test_postwithcleanmethod_admin_add_view_processes_a_post_request(self):
+
+        PostWithCleanMethod.objects.all().delete() # clear all post objects
+
+        user = User.objects.create_superuser('admin', 'admin@example.com', 'Admin123!')
+        self.client.force_login(user)
+
+        response = self.client.post(
+            '/admin/datetime_default_now/postwithcleanmethod/add/',
+            data={
+                'datetime_0': '2016-12-20',
+                'datetime_1': '17:05:27' 
+            }
+        )
+
+        # should redirect to post list
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/admin/datetime_default_now/postwithcleanmethod/')
+        self.assertEqual(PostWithCleanMethod.objects.count(), 1)
+
+        saved_post = PostWithCleanMethod.objects.first()
+        saved_post_datetime = saved_post.datetime
+
+        self.assertEqual(
+            saved_post_datetime,
+            timezone.make_aware(datetime(2016, 12, 20, 17, 5, 27))
+        )
+
+    def test_postwithcleanmethod_admin_edit_view_updates_post_datetime(self):
+
+        PostWithCleanMethod.objects.all().delete() # clear all post objects
+
+        user = User.objects.create_superuser('admin', 'admin@example.com', 'Admin123!')
+        self.client.force_login(user)
+
+        response = self.client.post(
+            '/admin/datetime_default_now/postwithcleanmethod/add/',
+            data={
+                'datetime_0': '2016-12-20',
+                'datetime_1': '17:05:27' 
+            }
+        )
+
+        self.assertEqual(PostWithCleanMethod.objects.count(), 1)
+
+        saved_post = PostWithCleanMethod.objects.first()
+        saved_post_datetime = saved_post.datetime
+
+        self.assertEqual(
+            saved_post_datetime,
+            timezone.make_aware(datetime(2016, 12, 20, 17, 5, 27))
+        )
+
+        response = self.client.post(
+            '/admin/datetime_default_now/postwithcleanmethod/%s/change/' % (saved_post.id,),
+            data={
+                'datetime_0': '2015-06-30',
+                'datetime_1': '12:00:00' 
+            }
+        )
+
+        self.assertEqual(PostWithCleanMethod.objects.count(), 1)
+
+        saved_post = PostWithCleanMethod.objects.first()
+        saved_post_datetime = saved_post.datetime
+
+        self.assertEqual(
+            saved_post_datetime,
+            timezone.make_aware(datetime(2015, 6, 30, 12, 0, 0))
+        )
+
+
