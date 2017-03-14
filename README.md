@@ -1,5 +1,5 @@
 # django-pocs
-Django proof of concepts
+Django "proof of concepts" project - a project that allows me to test features of Django in isolation, to help with debugging.
 
 ## Setup
 
