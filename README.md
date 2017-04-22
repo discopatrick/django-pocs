@@ -3,8 +3,8 @@ Django "proof of concepts" project - a project that allows me to test features o
 
 ## Setup
 
-`virtualenv venv --python=python3.4`
-`venv/bin/pip install -r requirements.txt`
+* `virtualenv venv --python=python3.4`
+* `venv/bin/pip install -r requirements.txt`
 
 ## Run
 
