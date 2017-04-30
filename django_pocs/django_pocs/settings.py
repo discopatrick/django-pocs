@@ -38,10 +38,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+
     'datetime_default_now',
     'django_filter_pagination',
-
-    'rest_framework',
+    'rest_framework_test.apps.RestFrameworkTestConfig'
 )
 
 MIDDLEWARE_CLASSES = (

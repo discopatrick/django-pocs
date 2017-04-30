@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class RestFrameworkConfig(AppConfig):
+class RestFrameworkTestConfig(AppConfig):
     name = 'rest_framework_test'
