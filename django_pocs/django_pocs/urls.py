@@ -19,5 +19,6 @@ from django_filter_pagination import urls as django_filter_pagination_urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^django_filter_pagination/', include(django_filter_pagination_urls))
+    url(r'^django_filter_pagination/', include(django_filter_pagination_urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
