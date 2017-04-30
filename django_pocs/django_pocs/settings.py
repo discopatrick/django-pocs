@@ -40,6 +40,8 @@ INSTALLED_APPS = (
 
     'datetime_default_now',
     'django_filter_pagination',
+
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
