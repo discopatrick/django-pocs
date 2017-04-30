@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class RestFrameworkConfig(AppConfig):
-    name = 'rest_framework'
+    name = 'rest_framework_test'
