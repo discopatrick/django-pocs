@@ -29,6 +29,7 @@ router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^django_filter_pagination/', include(django_filter_pagination_urls)),
-    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include('rest_framework_test.urls')),
+    url(r'^', include(router.urls)),
 ]
