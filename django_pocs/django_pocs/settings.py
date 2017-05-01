@@ -111,5 +111,5 @@ STATIC_URL = '/static/'
 # Django Rest Framework
 
 REST_FRAMEWORK = {
-    
+    'PAGE_SIZE': 10
 }
