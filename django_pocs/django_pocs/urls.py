@@ -17,19 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django_filter_pagination import urls as django_filter_pagination_urls
-from rest_framework import routers, serializers, viewsets
-from rest_framework_test import views
 
-
-# Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^django_filter_pagination/', include(django_filter_pagination_urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('rest_framework_test.urls')),
-    url(r'^', include(router.urls)),
 ]
