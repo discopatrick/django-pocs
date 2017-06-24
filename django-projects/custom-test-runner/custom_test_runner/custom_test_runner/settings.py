@@ -119,3 +119,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TEST_RUNNER = 'custom_test_runner.test_runners.RestoreDBDumpRunner'
