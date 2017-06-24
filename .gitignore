@@ -3,3 +3,5 @@ db.sqlite3
 /venv/
 .vagrant
 *.log
+venv2
+*.retry

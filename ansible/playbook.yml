@@ -1,0 +1,30 @@
+---
+
+- name: provision server for Django
+  hosts: all
+
+  tasks:
+
+    - name: update apt
+      apt:
+        update_cache: yes
+      become: yes
+
+    - name: install apt packages
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - virtualenv
+        - rabbitmq-server
+        - python3.6
+        # - python-pip
+        # - python3-pip
+        # - python-dev
+        # - build-essential
+      become: yes
+
+    - name: create virtualenv
+      command: virtualenv venv --python=python3.6
+
+    - name: install requirements into venv
+      command: venv/bin/pip install -r django_pocs/requirements.txt
